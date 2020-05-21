@@ -69,7 +69,7 @@ router.beforeEach((to, from, next) => {
         router.options.isAddDynamicMenuRoutes = true
         sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
         sessionStorage.setItem('permissions', JSON.stringify(data.permList || '[]'))
-        next({ ...to, replace: true })
+        next({ to, replace: true })
       } else {
         console.log(data.msg, 'color:blue')
         router.push({ name: 'login' })
