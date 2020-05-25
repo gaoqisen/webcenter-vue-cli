@@ -5,9 +5,6 @@
 const path = require('path')
 var devEnv = require('./dev.env')
 
-
-var contextPath = '/' + devEnv.contextPath
-var pathRewrite = '^' + contextPath
 module.exports = {
   dev: {
 
@@ -15,11 +12,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      contextPath : devEnv.OPEN_PROXY === false ? {} : {
-        target: 'http://localhost:8001' + contextPath + "/",
+      '/sample' : devEnv.OPEN_PROXY === false ? {} : {
+        target: 'http://localhost:8001/sample',
         changeOrigin: true,
         pathRewrite: {
-          pathRewrite: '/'
+          '^/sample': '/'
         }
       }
     },

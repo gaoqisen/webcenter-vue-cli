@@ -1,5 +1,6 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  contextPath: 'sample'
+  CONTEXT_PATH: '"sample"',
+  OPEN_PROXY: false
 }
