@@ -18,7 +18,6 @@ const _import = require('./import-' + process.env.NODE_ENV)
 // 全局路由(无需嵌套上左右整体布局)
 const globalRoutes = [
  // { path: '/404', component: _import('common/404'), name: '404', meta: { title: '404未找到' } },
-  { path: '/login', component: _import('common/login'), name: 'login', meta: { title: '登录' } }
 ]
 
 // 主入口路由(需嵌套上左右整体布局)
@@ -37,10 +36,10 @@ const mainRoutes = {
   ],
   beforeEnter (to, from, next) {
     let token = Vue.cookie.get('token')
-    if (!token || !/\S/.test(token)) {
-      // clearLoginInfo()
-      next({ name: 'login' })
-    }
+    // if (!token || !/\S/.test(token)) {
+    //   // clearLoginInfo()
+    //   next({ name: 'login' })
+    // }
     next()
   }
 }
@@ -69,14 +68,15 @@ router.beforeEach((to, from, next) => {
         router.options.isAddDynamicMenuRoutes = true
         sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
         sessionStorage.setItem('permissions', JSON.stringify(data.permList || '[]'))
+        sessionStorage.setItem('username', data.username)
         next({ to, replace: true })
       } else {
         console.log(data.msg, 'color:blue')
-        router.push({ name: 'login' })
+        window.location.href = '/sample/sys/login'
       }
     }).catch((e) => {
       console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
-      router.push({ name: 'login' })
+    //  router.push({ name: 'login' })
     })
   }
 })

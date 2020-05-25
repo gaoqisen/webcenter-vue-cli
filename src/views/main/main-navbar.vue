@@ -86,12 +86,12 @@
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: this.$http.adornUrl('/main/logout'),
+            url: this.$http.adornUrl('/sys/logout'),
             method: 'post',
             data: this.$http.adornData()
           }).then(({data}) => {
             if (data && data.code === 0) {
-              this.$router.push({ name: 'login' })
+              this.$router.go(0)
             }
           })
         }).catch(() => {})
