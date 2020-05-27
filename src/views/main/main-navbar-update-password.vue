@@ -77,7 +77,7 @@
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
-              url: this.$http.adornUrl('/sys/user/password'),
+              url: this.$http.adornUrl('/sys/password'),
               method: 'post',
               data: this.$http.adornData({
                 'password': this.dataForm.password,
@@ -93,7 +93,15 @@
                     this.visible = false
                     this.$nextTick(() => {
                       this.mainTabs = []
-                      this.$router.replace({ name: 'login' })
+                      this.$http({
+                        url: this.$http.adornUrl('/sys/logout'),
+                        method: 'post',
+                        data: this.$http.adornData()
+                      }).then(({data}) => {
+                        if (data && data.code === 0) {
+                          this.$router.go(0)
+                        }
+                      })
                     })
                   }
                 })
