@@ -93,6 +93,7 @@
                     this.visible = false
                     this.$nextTick(() => {
                       this.mainTabs = []
+                      // 退出后重新登录
                       this.$http({
                         url: this.$http.adornUrl('/sys/logout'),
                         method: 'post',
